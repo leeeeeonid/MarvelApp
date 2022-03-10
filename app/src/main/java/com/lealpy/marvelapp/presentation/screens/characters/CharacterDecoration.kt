@@ -15,12 +15,9 @@ class CharacterDecoration (
         state: RecyclerView.State,
     ) {
         val position = parent.getChildAdapterPosition(view)
-        outRect.left = spacing
-        outRect.right = spacing
-        if (position == 0) {
+        if (position != 0) {
             outRect.top = spacing
         }
-        outRect.bottom = spacing
     }
 
 }

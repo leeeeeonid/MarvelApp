@@ -27,16 +27,17 @@ class CharacterAdapter(
             binding.characterItemDescription.text = character.description
 
             Log.e(APP_LOG_TAG, character.imageURL)
+            Log.e(APP_LOG_TAG, character.modified)
 
             try {
                 requestManager
                     .load(character.imageURL)
-                    //.placeholder(R.drawable.ic_baseline_sentiment_dissatisfied_24)
-                    //.error(R.drawable.ic_baseline_sentiment_dissatisfied_24)
+                    .placeholder(R.drawable.ic_baseline_sentiment_dissatisfied_24)
+                    .error(R.drawable.ic_baseline_sentiment_dissatisfied_24)
                     .into(binding.characterItemImage)
             } catch (e: Exception) {
                 Log.e(APP_LOG_TAG, e.message.toString())
-                //binding.characterItemImage.setImageResource(R.drawable.ic_baseline_sentiment_dissatisfied_24)
+                binding.characterItemImage.setImageResource(R.drawable.ic_baseline_sentiment_dissatisfied_24)
             }
 
             binding.root.setOnClickListener {

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.marvelapp.domain.models.Character
+import com.lealpy.marvelapp.domain.models.SortBy
 import com.lealpy.marvelapp.domain.use_cases.GetCharactersUseCase
 import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +34,36 @@ class CharactersViewModel @Inject constructor(
 
     fun onSwipedRefresh() {
         getCharacters()
+    }
+
+    fun onSortByClicked(sortBy: SortBy) {
+        val characters = _characters.value
+        if (characters != null) {
+            when (sortBy) {
+                SortBy.BY_ALPHABET -> {
+                    _characters.value = characters.sortedBy { character ->
+                        character.name
+                    }
+                }
+                SortBy.BY_DATE -> {
+                    _characters.value = characters.sortedBy { character ->
+                        character.modified
+                    }
+                }
+                SortBy.BY_ALPHABET_DESCENDING -> {
+                    _characters.value = characters.sortedByDescending { character ->
+                        character.name
+                    }
+                }
+                SortBy.BY_DATE_DESCENDING -> {
+                    _characters.value = characters.sortedByDescending { character ->
+                        character.modified
+                    }
+                }
+            }
+        } else {
+            getCharacters()
+        }
     }
 
     private fun getCharacters() {
