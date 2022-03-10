@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.ItemCharacterBinding
-import com.lealpy.marvelapp.domain.models.Character
+import com.lealpy.marvelapp.presentation.models.CharacterUi
 import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
 
 class CharacterAdapter(
-    private val onItemClick: (character: Character) -> Unit,
-) : ListAdapter<Character, CharacterAdapter.CharacterHolder>(DiffCallback()) {
+    private val onItemClick: (characterUi: CharacterUi) -> Unit,
+) : ListAdapter<CharacterUi, CharacterAdapter.CharacterHolder>(DiffCallback()) {
 
     inner class CharacterHolder(
         private val binding: ItemCharacterBinding,
@@ -22,16 +22,16 @@ class CharacterAdapter(
 
         private val requestManager = Glide.with(itemView.context)
 
-        fun bind(character: Character) {
-            binding.characterItemName.text = character.name
-            binding.characterItemDescription.text = character.description
+        fun bind(characterUi: CharacterUi) {
+            binding.characterItemName.text = characterUi.name
+            binding.characterItemDescription.text = characterUi.description
 
-            Log.e(APP_LOG_TAG, character.imageURL)
-            Log.e(APP_LOG_TAG, character.modified)
+            Log.e(APP_LOG_TAG, characterUi.imageURL)
+            Log.e(APP_LOG_TAG, characterUi.modified)
 
             try {
                 requestManager
-                    .load(character.imageURL)
+                    .load(characterUi.imageURL)
                     .placeholder(R.drawable.ic_baseline_sentiment_dissatisfied_24)
                     .error(R.drawable.ic_baseline_sentiment_dissatisfied_24)
                     .into(binding.characterItemImage)
@@ -41,7 +41,7 @@ class CharacterAdapter(
             }
 
             binding.root.setOnClickListener {
-                onItemClick(character)
+                onItemClick(characterUi)
             }
         }
     }
@@ -60,13 +60,13 @@ class CharacterAdapter(
         holder.bind(item)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Character>() {
-        override fun areItemsTheSame(oldItemUi: Character, newItemUi: Character): Boolean {
-            return oldItemUi.id == newItemUi.id
+    class DiffCallback : DiffUtil.ItemCallback<CharacterUi>() {
+        override fun areItemsTheSame(oldItem: CharacterUi, newItem: CharacterUi): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItemUi: Character, newItemUi: Character): Boolean {
-            return oldItemUi == newItemUi
+        override fun areContentsTheSame(oldItem: CharacterUi, newItem: CharacterUi): Boolean {
+            return oldItem == newItem
         }
     }
 

@@ -5,10 +5,11 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lealpy.marvelapp.domain.models.Character
 import com.lealpy.marvelapp.domain.models.SortBy
 import com.lealpy.marvelapp.domain.use_cases.GetCharactersUseCase
+import com.lealpy.marvelapp.presentation.models.CharacterUi
 import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
+import com.lealpy.marvelapp.presentation.utils.toCharactersUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -20,8 +21,8 @@ class CharactersViewModel @Inject constructor(
     private val getCharactersUseCase: GetCharactersUseCase,
 ) : ViewModel() {
 
-    private val _characters = MutableLiveData<List<Character>>()
-    val characters: LiveData<List<Character>> = _characters
+    private val _charactersUi = MutableLiveData<List<CharacterUi>>()
+    val charactersUi: LiveData<List<CharacterUi>> = _charactersUi
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
@@ -29,53 +30,56 @@ class CharactersViewModel @Inject constructor(
     private val disposable = CompositeDisposable()
 
     init {
-        getCharacters()
+        getCharactersUi()
     }
 
     fun onSwipedRefresh() {
-        getCharacters()
+        getCharactersUi()
     }
 
     fun onSortByClicked(sortBy: SortBy) {
-        val characters = _characters.value
-        if (characters != null) {
+        val charactersUi = _charactersUi.value
+        if (charactersUi != null) {
             when (sortBy) {
                 SortBy.BY_ALPHABET -> {
-                    _characters.value = characters.sortedBy { character ->
+                    _charactersUi.value = charactersUi.sortedBy { character ->
                         character.name
                     }
                 }
                 SortBy.BY_DATE -> {
-                    _characters.value = characters.sortedBy { character ->
+                    _charactersUi.value = charactersUi.sortedBy { character ->
                         character.modified
                     }
                 }
                 SortBy.BY_ALPHABET_DESCENDING -> {
-                    _characters.value = characters.sortedByDescending { character ->
+                    _charactersUi.value = charactersUi.sortedByDescending { character ->
                         character.name
                     }
                 }
                 SortBy.BY_DATE_DESCENDING -> {
-                    _characters.value = characters.sortedByDescending { character ->
+                    _charactersUi.value = charactersUi.sortedByDescending { character ->
                         character.modified
                     }
                 }
             }
         } else {
-            getCharacters()
+            getCharactersUi()
         }
     }
 
-    private fun getCharacters() {
+    private fun getCharactersUi() {
         _progressBarVisibility.value = View.VISIBLE
 
         disposable.add(
             getCharactersUseCase()
+                .map { characters ->
+                    characters.toCharactersUi()
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { characters ->
-                        _characters.value = characters
+                    { charactersUi ->
+                        _charactersUi.value = charactersUi
                         _progressBarVisibility.value = View.GONE
                     },
                     { error ->
