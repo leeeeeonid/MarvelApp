@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/characterImage"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/characterName"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_16_dp"
+        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:layout_marginEnd="@dimen/dimen_16_dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/dimen_36_sp"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characterImage"
+        tools:text="A-Bomb (HAS)" />
+
+    <TextView
+        android:id="@+id/characterDescription"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_12_dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/dimen_14_sp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintEnd_toEndOf="@+id/characterName"
+        app:layout_constraintStart_toStartOf="@+id/characterName"
+        app:layout_constraintTop_toBottomOf="@+id/characterName"
+        tools:text="Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction!" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
