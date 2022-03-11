@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.ItemCharacterBinding
-import com.lealpy.marvelapp.presentation.models.CharacterUi
+import com.lealpy.marvelapp.domain.models.Character
 
 class CharacterAdapter(
-    private val onItemClick: (characterUi: CharacterUi) -> Unit,
-) : ListAdapter<CharacterUi, CharacterAdapter.CharacterHolder>(DiffCallback()) {
+    private val onItemClick: (character: Character) -> Unit,
+) : ListAdapter<Character, CharacterAdapter.CharacterHolder>(DiffCallback()) {
 
     inner class CharacterHolder(
         private val binding: ItemCharacterBinding,
@@ -20,18 +20,18 @@ class CharacterAdapter(
 
         private val requestManager = Glide.with(itemView.context)
 
-        fun bind(characterUi: CharacterUi) {
-            binding.characterItemName.text = characterUi.name
-            binding.characterItemDescription.text = characterUi.description
+        fun bind(character: Character) {
+            binding.characterItemName.text = character.name
+            binding.characterItemDescription.text = character.description
 
             requestManager
-                .load(characterUi.imageURL)
+                .load(character.imageURL)
                 .placeholder(R.drawable.ic_baseline_sentiment_dissatisfied_24)
                 .error(R.drawable.ic_baseline_sentiment_dissatisfied_24)
                 .into(binding.characterItemImage)
 
             binding.root.setOnClickListener {
-                onItemClick(characterUi)
+                onItemClick(character)
             }
         }
     }
@@ -50,12 +50,12 @@ class CharacterAdapter(
         holder.bind(item)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<CharacterUi>() {
-        override fun areItemsTheSame(oldItem: CharacterUi, newItem: CharacterUi): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<Character>() {
+        override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: CharacterUi, newItem: CharacterUi): Boolean {
+        override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
             return oldItem == newItem
         }
     }

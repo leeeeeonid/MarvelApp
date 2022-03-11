@@ -22,8 +22,8 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
 
     private val viewModel: CharactersViewModel by viewModels()
 
-    private val characterAdapter = CharacterAdapter { characterUi ->
-        val args = bundleOf(CHARACTER_ID_KEY to characterUi.id)
+    private val characterAdapter = CharacterAdapter { character ->
+        val args = bundleOf(CHARACTER_ID_KEY to character.id)
         findNavController().navigate(
             R.id.action_charactersFragment_to_detailsFragment,
             args,
@@ -67,8 +67,8 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
     }
 
     private fun initObservers() {
-        viewModel.charactersUi.observe(viewLifecycleOwner) { charactersUi ->
-            characterAdapter.submitList(charactersUi)
+        viewModel.characters.observe(viewLifecycleOwner) { characters ->
+            characterAdapter.submitList(characters)
             binding.recyclerView.smoothScrollToPosition(0)
         }
 
