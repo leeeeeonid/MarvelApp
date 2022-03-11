@@ -6,9 +6,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.FragmentCharactersBinding
 import com.lealpy.marvelapp.domain.models.SortBy
+import com.lealpy.marvelapp.presentation.utils.CheckNetworkConnection
 import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_KEY
 import com.lealpy.marvelapp.presentation.utils.Const.FILTERS_RESULT_KEY
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,12 +19,22 @@ import dagger.hilt.android.AndroidEntryPoint
 class CharactersFragment : Fragment(R.layout.fragment_characters) {
 
     private lateinit var binding: FragmentCharactersBinding
+
     private val viewModel: CharactersViewModel by viewModels()
+
     private val characterAdapter = CharacterAdapter { characterUi ->
         val args = bundleOf(CHARACTER_KEY to characterUi)
         findNavController().navigate(
             R.id.action_charactersFragment_to_detailsFragment,
             args,
+        )
+    }
+
+    private val snackbar by lazy {
+        Snackbar.make(
+            binding.root,
+            getString(R.string.no_internet),
+            Snackbar.LENGTH_INDEFINITE
         )
     }
 
@@ -50,6 +62,8 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
         binding.filtersBtn.setOnClickListener {
             findNavController().navigate(R.id.action_charactersFragment_to_filtersFragment)
         }
+
+        snackbar.show()
     }
 
     private fun initObservers() {
@@ -68,6 +82,15 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
             ?.observe(viewLifecycleOwner) { sortBy ->
                 if (sortBy != null) {
                     viewModel.onSortByClicked(sortBy)
+                }
+            }
+
+        CheckNetworkConnection(requireActivity().application)
+            .observe(viewLifecycleOwner) { isConnected ->
+                if (isConnected) {
+                    snackbar.dismiss()
+                } else {
+                    snackbar.show()
                 }
             }
     }

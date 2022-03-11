@@ -7,4 +7,5 @@
     <string name="filters_sort_by_alphabet_descending">По алфавиту в обратном порядке</string>
     <string name="filters_sort_by_date_descending">По дате изменения в обратном порядке</string>
     <string name="filters_apply">Применить</string>
+    <string name="no_internet">Отсутствует интернет-соединение</string>
 </resources>
