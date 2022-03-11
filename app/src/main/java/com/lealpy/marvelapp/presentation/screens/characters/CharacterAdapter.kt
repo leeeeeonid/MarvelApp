@@ -1,6 +1,5 @@
 package com.lealpy.marvelapp.presentation.screens.characters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.ItemCharacterBinding
 import com.lealpy.marvelapp.presentation.models.CharacterUi
-import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
 
 class CharacterAdapter(
     private val onItemClick: (characterUi: CharacterUi) -> Unit,
@@ -26,19 +24,11 @@ class CharacterAdapter(
             binding.characterItemName.text = characterUi.name
             binding.characterItemDescription.text = characterUi.description
 
-            Log.e(APP_LOG_TAG, characterUi.imageURL)
-            Log.e(APP_LOG_TAG, characterUi.modified)
-
-            try {
-                requestManager
-                    .load(characterUi.imageURL)
-                    .placeholder(R.drawable.ic_baseline_sentiment_dissatisfied_24)
-                    .error(R.drawable.ic_baseline_sentiment_dissatisfied_24)
-                    .into(binding.characterItemImage)
-            } catch (e: Exception) {
-                Log.e(APP_LOG_TAG, e.message.toString())
-                binding.characterItemImage.setImageResource(R.drawable.ic_baseline_sentiment_dissatisfied_24)
-            }
+            requestManager
+                .load(characterUi.imageURL)
+                .placeholder(R.drawable.ic_baseline_sentiment_dissatisfied_24)
+                .error(R.drawable.ic_baseline_sentiment_dissatisfied_24)
+                .into(binding.characterItemImage)
 
             binding.root.setOnClickListener {
                 onItemClick(characterUi)
