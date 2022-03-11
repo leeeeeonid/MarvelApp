@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.lealpy.marvelapp.domain.models.Character
 import com.lealpy.marvelapp.domain.models.SortBy
 import com.lealpy.marvelapp.domain.use_cases.GetCharactersUseCase
 import com.lealpy.marvelapp.presentation.screens.BaseViewModel
@@ -12,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
-import com.lealpy.marvelapp.domain.models.Character
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
