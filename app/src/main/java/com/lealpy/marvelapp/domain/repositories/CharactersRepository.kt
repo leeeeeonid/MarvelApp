@@ -6,5 +6,6 @@ import io.reactivex.rxjava3.core.Single
 interface CharactersRepository {
 
     fun getCharacters(): Single<List<Character>>
+    fun getCharacterById(characterId: Int): Single<Character>
 
 }

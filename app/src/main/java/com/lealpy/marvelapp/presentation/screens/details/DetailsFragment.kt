@@ -7,8 +7,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.FragmentDetailsBinding
-import com.lealpy.marvelapp.presentation.models.CharacterUi
-import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_KEY
+import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_ID_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,13 +24,13 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     }
 
     private fun getArgs() {
-        arguments?.getParcelable<CharacterUi>(CHARACTER_KEY)?.let { characterUi ->
-            viewModel.onArgsReceived(characterUi)
+        arguments?.getInt(CHARACTER_ID_KEY)?.let { characterId ->
+            viewModel.onArgsReceived(characterId)
         }
     }
 
     private fun initObservers() {
-        viewModel.characterUi.observe(viewLifecycleOwner) { characterUi ->
+        viewModel.character.observe(viewLifecycleOwner) { characterUi ->
             binding.characterName.text = characterUi.name
             binding.characterDescription.text = characterUi.description
 
@@ -40,6 +39,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 .placeholder(R.drawable.ic_baseline_sentiment_dissatisfied_24)
                 .error(R.drawable.ic_baseline_sentiment_dissatisfied_24)
                 .into(binding.characterImage)
+        }
+
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
+            binding.progressBar.visibility = progressBarVisibility
         }
     }
 

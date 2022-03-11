@@ -11,7 +11,7 @@ import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.FragmentCharactersBinding
 import com.lealpy.marvelapp.domain.models.SortBy
 import com.lealpy.marvelapp.presentation.utils.CheckNetworkConnection
-import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_KEY
+import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_ID_KEY
 import com.lealpy.marvelapp.presentation.utils.Const.FILTERS_RESULT_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +23,7 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
     private val viewModel: CharactersViewModel by viewModels()
 
     private val characterAdapter = CharacterAdapter { characterUi ->
-        val args = bundleOf(CHARACTER_KEY to characterUi)
+        val args = bundleOf(CHARACTER_ID_KEY to characterUi.id)
         findNavController().navigate(
             R.id.action_charactersFragment_to_detailsFragment,
             args,

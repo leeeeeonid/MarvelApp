@@ -1,6 +1,7 @@
 package com.lealpy.marvelapp.di
 
 import com.lealpy.marvelapp.data.api.CharactersApi
+import com.lealpy.marvelapp.data.database.CharactersDao
 import com.lealpy.marvelapp.data.repositories.CharactersRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -16,8 +17,12 @@ class RepositoriesModule {
     @Singleton
     fun provideCharactersRepository(
         charactersApi: CharactersApi,
+        charactersDao: CharactersDao,
     ): CharactersRepositoryImpl {
-        return CharactersRepositoryImpl(charactersApi = charactersApi)
+        return CharactersRepositoryImpl(
+            charactersApi = charactersApi,
+            charactersDao = charactersDao,
+        )
     }
 
 }
