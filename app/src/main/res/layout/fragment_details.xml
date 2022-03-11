@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="@+id/characterName"
             app:layout_constraintStart_toStartOf="@+id/characterName"
             app:layout_constraintTop_toBottomOf="@+id/characterName"
-            tools:text="@tools:sample/lorem/random"/>
+            tools:text="@tools:sample/lorem/random" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

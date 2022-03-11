@@ -12,9 +12,13 @@ class CharactersRepositoryImpl @Inject constructor(
 ) : CharactersRepository {
 
     override fun getCharacters(): Single<List<Character>> {
-        return charactersApi.getCharacters().map { characterResponse ->
+        return charactersApi.getCharacters(limit = LIMIT_ITEMS).map { characterResponse ->
             characterResponse.data.results.toCharacters()
         }
+    }
+
+    companion object {
+        private const val LIMIT_ITEMS = "50"
     }
 
 }

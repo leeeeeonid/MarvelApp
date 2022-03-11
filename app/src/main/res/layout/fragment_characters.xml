@@ -30,23 +30,23 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/filtersBtn"
+        style="@style/Button"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
-        android:text="@string/characters_filter_btn_text"
         android:layout_marginStart="@dimen/dimen_9_dp"
         android:layout_marginEnd="@dimen/dimen_9_dp"
         android:layout_marginBottom="@dimen/dimen_20_dp"
+        android:text="@string/characters_filter_btn_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/Button"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:indeterminateTint="@color/green"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

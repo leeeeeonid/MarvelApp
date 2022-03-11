@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class CharacterDecoration (
+class CharacterDecoration(
     private val spacing: Int,
 ) : RecyclerView.ItemDecoration() {
 

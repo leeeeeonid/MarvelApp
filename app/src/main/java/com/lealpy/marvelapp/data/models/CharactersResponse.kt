@@ -1,6 +1,6 @@
 package com.lealpy.marvelapp.data.models
 
-data class CharactersResponse (
+data class CharactersResponse(
     val code: Int,
     val status: String,
     val data: CharactersData,
