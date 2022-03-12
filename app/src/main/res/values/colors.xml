@@ -5,7 +5,8 @@
     <color name="gray">#5F5F5F</color>
     <color name="green">#41EB5C</color>
     <color name="text_black">#000000</color>
-    <color name="radio_btn_tick_state_checked">#72DFC5</color>
+    <color name="radio_btn_tick_state_checked">#1DDE7D</color>
     <color name="radio_btn_tick_state_unchecked">#C8E4DE</color>
     <color name="radio_btn_divider">#BABABA</color>
+    <color name="radio_btn_border">#1DDE7D</color>
 </resources>
