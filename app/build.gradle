@@ -18,7 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.leaply.marvelapp.CustomTestRunner"
     }
 
     buildTypes {
@@ -88,8 +88,48 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     /** Tests */
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    /** Test */
+
+    //Roboelectric
+    testImplementation "org.robolectric:robolectric:4.7.3"
+
+    //Android + Kotlin
+    debugImplementation 'androidx.fragment:fragment-testing:1.4.1'
+    implementation "androidx.test:core:1.4.0"
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    testImplementation "androidx.test:core-ktx:1.4.0"
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+
+    // Hamcrest
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
+
+    // Espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    androidTestImplementation "androidx.test.espresso:espresso-accessibility:3.3.0"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // JUnit
+    implementation 'androidx.test.ext:junit-ktx:1.1.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    testImplementation 'junit:junit:4.13.2'
+
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:4.0.0'
+    testImplementation 'org.mockito:mockito-inline:2.11.0'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
+
+    // Dagger + Hilt
+    testImplementation "com.google.dagger:hilt-android-testing:2.40.5"
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.40.5'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.40.5'
+    kaptTest "com.google.dagger:hilt-android-compiler:2.40.5"
+
+    // Idling resources
+    androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+    androidTestImplementation 'com.squareup.rx.idler:rx3-idler:0.11.0'
+
+    // For recyclerView ui tests
+    implementation 'it.xabaras.android.espresso:recyclerview-child-actions:1.0'
 
 }
