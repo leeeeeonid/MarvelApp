@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Button">
+        <item name="cornerRadius">@dimen/dimen_30_dp</item>
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/dimen_24_sp</item>
+        <item name="android:fontFamily">@font/dm_sans_regular</item>
+        <item name="android:padding">@dimen/dimen_18_dp</item>
+    </style>
+
+    <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:button">@drawable/radio_btn_inset</item>
+        <item name="android:buttonTint">@color/radio_btn</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:paddingEnd">@dimen/dimen_18_dp</item>
+        <item name="android:background">@drawable/radio_btn_background</item>
+    </style>
+
+</resources>
