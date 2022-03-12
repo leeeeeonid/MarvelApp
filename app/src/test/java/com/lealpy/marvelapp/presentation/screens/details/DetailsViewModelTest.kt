@@ -39,13 +39,13 @@ class DetailsViewModelTest {
         Mockito.`when`(
             getCharacterByIdUseCase(anyInt())
         ).thenReturn(
-            Single.just(testCharacter)
+            Single.just(TEST_CHARACTER)
         )
 
         Mockito.`when`(
             savedStateHandle.get<Int>(anyString())
         ).thenReturn(
-            testCharacter.id
+            TEST_CHARACTER.id
         )
 
         detailsViewModel = DetailsViewModel(
@@ -61,7 +61,7 @@ class DetailsViewModelTest {
         /** When */
 
         /** Then */
-        val expected = testCharacter
+        val expected = TEST_CHARACTER
         val actual = detailsViewModel.character.getOrAwaitValue()
         assertEquals(expected, actual)
     }
@@ -79,7 +79,7 @@ class DetailsViewModelTest {
     }
 
     companion object {
-        private val testCharacter = Character(
+        private val TEST_CHARACTER = Character(
             id = 1017100,
             name = "A-Bomb (HAS)",
             description = "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction!",
