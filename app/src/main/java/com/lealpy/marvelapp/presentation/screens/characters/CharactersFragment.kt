@@ -1,6 +1,7 @@
 package com.lealpy.marvelapp.presentation.screens.characters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -9,9 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.FragmentCharactersBinding
 import com.lealpy.marvelapp.domain.models.SortBy
+import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
 import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_ID_KEY
 import com.lealpy.marvelapp.presentation.utils.Const.FILTERS_RESULT_KEY
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment(R.layout.fragment_characters) {
@@ -64,14 +67,19 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
             binding.progressBar.visibility = progressBarVisibility
         }
 
-        findNavController().currentBackStackEntry
-            ?.savedStateHandle
-            ?.getLiveData<SortBy>(FILTERS_RESULT_KEY)
-            ?.observe(viewLifecycleOwner) { sortBy ->
-                if (sortBy != null) {
-                    viewModel.onSortByClicked(sortBy)
+        try {
+            findNavController().currentBackStackEntry
+                ?.savedStateHandle
+                ?.getLiveData<SortBy>(FILTERS_RESULT_KEY)
+                ?.observe(viewLifecycleOwner) { sortBy ->
+                    if (sortBy != null) {
+                        viewModel.onSortByClicked(sortBy)
+                    }
                 }
-            }
+        } catch (e: Exception) {
+            Log.e(APP_LOG_TAG, e.message.toString())
+        }
+
     }
 
 }
