@@ -36,6 +36,20 @@ class TestCharactersRepositoryImpl : CharactersRepository {
                 imageURL = "http://i.annihil.us/u/prod/marvel/i/mg/a/f0/5202887448860.jpg",
                 modified = "2013-08-07T13:49:06-0400"
             ),
+            Character(
+                id = 1010905,
+                name = "Amun",
+                description = "Amun is a ruthless teenage assassin, employed by the Sisterhood of the Wasp to serve under the mage Vincent after Araña interrupted the ritual to initiate the Wasp's new chosen one.",
+                imageURL = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg",
+                modified = "1969-12-31T19:00:00-0500"
+            ),
+            Character(
+                id = 1011684,
+                name = "Angel (Angel Salvadore)",
+                description = "Driven out of home by her abusive step-father, fourteen-year old Angel Salvadore slept in the woods, where her mutant nature manifested itself in the form of a protective cocoon",
+                imageURL = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg",
+                modified = "2021-08-19T00:06:46-0400"
+            ),
         )
     }
 

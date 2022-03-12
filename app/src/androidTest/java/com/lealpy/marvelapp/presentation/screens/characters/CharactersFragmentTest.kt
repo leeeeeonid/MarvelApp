@@ -1,7 +1,7 @@
 package com.lealpy.marvelapp.presentation.screens.characters
 
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.lealpy.marvelapp.R
@@ -14,7 +14,6 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
-import it.xabaras.android.espresso.recyclerviewchildactions.RecyclerViewChildActions
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -49,7 +48,7 @@ class CharactersFragmentTest {
         Espresso.onView(
             withId(R.id.recyclerView)
         ).check(
-            ViewAssertions.matches(isDisplayed())
+            matches(isDisplayed())
         )
     }
 
@@ -60,7 +59,6 @@ class CharactersFragmentTest {
 
         /** When */
         launchFragmentInHiltContainer<CharactersFragment>()
-        Thread.sleep(2000)
 
         /** Then */
         for (position in 0..testCharacters.lastIndex) {
@@ -68,25 +66,17 @@ class CharactersFragmentTest {
                 RecyclerViewActions.scrollToPosition<CharacterAdapter.CharacterHolder>(position)
             )
 
-            Espresso.onView(withId(R.id.recyclerView))
-                .check(
-                    ViewAssertions.matches(
-                        RecyclerViewChildActions.childOfViewAtPositionWithMatcher(
-                            R.id.characterItemName,
-                            position,
-                            withText(testCharacters[position].name)
-                        )
-                    )
-                )
-                .check(
-                    ViewAssertions.matches(
-                        RecyclerViewChildActions.childOfViewAtPositionWithMatcher(
-                            R.id.characterItemDescription,
-                            position,
-                            withText(testCharacters[position].description)
-                        )
-                    )
-                )
+            Espresso.onView(
+                withText(testCharacters[position].name)
+            ).check(
+                matches(isDisplayed())
+            )
+
+            Espresso.onView(
+                withText(testCharacters[position].description)
+            ).check(
+                matches(isDisplayed())
+            )
         }
     }
 
