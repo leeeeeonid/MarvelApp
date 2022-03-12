@@ -4,10 +4,12 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.lealpy.marvelapp.domain.models.Character
 import com.lealpy.marvelapp.domain.use_cases.GetCharacterByIdUseCase
 import com.lealpy.marvelapp.presentation.screens.BaseViewModel
-import com.lealpy.marvelapp.presentation.utils.Const
+import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
+import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_ID_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -15,14 +17,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     private val getCharacterByIdUseCase: GetCharacterByIdUseCase,
 ) : BaseViewModel() {
 
     private val _character = MutableLiveData<Character>()
     val character: LiveData<Character> = _character
 
-    fun onArgsReceived(characterId: Int) {
-        getCharacterById(characterId)
+    init {
+        savedStateHandle.get<Int>(CHARACTER_ID_KEY)?.let { characterId ->
+            getCharacterById(characterId)
+        }
     }
 
     private fun getCharacterById(characterId: Int) {
@@ -37,7 +42,7 @@ class DetailsViewModel @Inject constructor(
                         _progressBarVisibility.value = View.GONE
                     },
                     { error ->
-                        Log.e(Const.APP_LOG_TAG, error.message.toString())
+                        Log.e(APP_LOG_TAG, error.message.toString())
                         _progressBarVisibility.value = View.GONE
                     }
                 )

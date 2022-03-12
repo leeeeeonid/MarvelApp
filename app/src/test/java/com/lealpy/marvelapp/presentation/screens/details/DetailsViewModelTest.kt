@@ -1,5 +1,6 @@
 package com.lealpy.marvelapp.presentation.screens.details
 
+import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -10,7 +11,8 @@ import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import io.reactivex.rxjava3.schedulers.Schedulers
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -26,18 +28,25 @@ class DetailsViewModelTest {
     var rule: TestRule = InstantTaskExecutorRule()
 
     private lateinit var detailsViewModel: DetailsViewModel
-
     private val getCharacterByIdUseCase = Mockito.mock(GetCharacterByIdUseCase::class.java)
-
     private val savedStateHandle = Mockito.mock(SavedStateHandle::class.java)
 
-    private fun setup() {
+    @Before
+    fun setup() {
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
 
-        val getCharacterByIdUseCaseResult = Single.just(testCharacter)
-        Mockito.`when`(getCharacterByIdUseCase(anyInt())).thenReturn(getCharacterByIdUseCaseResult)
-        Mockito.`when`(savedStateHandle.get<Int>(anyString())).thenReturn(testCharacter.id)
+        Mockito.`when`(
+            getCharacterByIdUseCase(anyInt())
+        ).thenReturn(
+            Single.just(testCharacter)
+        )
+
+        Mockito.`when`(
+            savedStateHandle.get<Int>(anyString())
+        ).thenReturn(
+            testCharacter.id
+        )
 
         detailsViewModel = DetailsViewModel(
             savedStateHandle = savedStateHandle,
@@ -50,11 +59,22 @@ class DetailsViewModelTest {
         /** Given */
 
         /** When */
-        setup()
 
         /** Then */
         val expected = testCharacter
         val actual = detailsViewModel.character.getOrAwaitValue()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `progressBarVisibility is GONE after character loading`() {
+        /** Given */
+
+        /** When */
+
+        /** Then */
+        val expected = View.GONE
+        val actual = detailsViewModel.progressBarVisibility.getOrAwaitValue()
         assertEquals(expected, actual)
     }
 
