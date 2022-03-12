@@ -14,7 +14,6 @@ import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
 import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_ID_KEY
 import com.lealpy.marvelapp.presentation.utils.Const.FILTERS_RESULT_KEY
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment(R.layout.fragment_characters) {

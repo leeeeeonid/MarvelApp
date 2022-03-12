@@ -21,15 +21,4 @@
         <item name="android:paddingEnd">@dimen/dimen_18_dp</item>
     </style>
 
-    <style name="Test">
-
-        <item name="android:button">@drawable/ic_baseline_check_24</item>
-        <item name="android:textColor">@color/text_black</item>
-        <item name="android:textSize">@dimen/dimen_16_sp</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-
-    </style>
-
-    <dimen name="dimen_30_dp">30dp</dimen>
-    <dimen name="dimen_18_dp">18dp</dimen>
 </resources>

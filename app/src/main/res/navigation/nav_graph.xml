@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/charactersFragment"
         android:name="com.lealpy.marvelapp.presentation.screens.characters.CharactersFragment"
-        android:label="CharactersFragment" >
+        android:label="CharactersFragment">
         <action
             android:id="@+id/action_charactersFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />

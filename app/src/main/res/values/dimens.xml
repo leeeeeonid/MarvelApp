@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Density-independent Pixels -->
     <dimen name="dimen_0_dp">0dp</dimen>
     <dimen name="dimen_8_dp">8dp</dimen>
     <dimen name="dimen_9_dp">9dp</dimen>
-    <dimen name="dimen_10_dp">10dp</dimen>
     <dimen name="dimen_12_dp">12dp</dimen>
     <dimen name="dimen_16_dp">16dp</dimen>
+    <dimen name="dimen_18_dp">18dp</dimen>
     <dimen name="dimen_20_dp">20dp</dimen>
     <dimen name="dimen_24_dp">24dp</dimen>
+    <dimen name="dimen_30_dp">30dp</dimen>
     <dimen name="dimen_36_dp">36dp</dimen>
     <dimen name="dimen_110_dp">110dp</dimen>
 
+    <!-- Scalable Pixels -->
+    <dimen name="dimen_12_sp">12sp</dimen>
     <dimen name="dimen_14_sp">14sp</dimen>
-    <dimen name="dimen_36_sp">36sp</dimen>
+    <dimen name="dimen_16_sp">16sp</dimen>
     <dimen name="dimen_20_sp">20sp</dimen>
     <dimen name="dimen_24_sp">24sp</dimen>
-    <dimen name="dimen_12_sp">12sp</dimen>
-    <dimen name="dimen_16_sp">16sp</dimen>
+    <dimen name="dimen_36_sp">36sp</dimen>
 </resources>
