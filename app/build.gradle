@@ -18,7 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.leaply.marvelapp.CustomTestRunner"
+        testInstrumentationRunner "com.lealpy.marvelapp.CustomTestRunner"
     }
 
     buildTypes {
@@ -50,6 +50,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     /** Navigation */
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
@@ -78,7 +79,6 @@ dependencies {
     /** Dagger + Hilt */
     implementation "com.google.dagger:dagger:2.40.5"
     implementation 'com.google.dagger:hilt-android:2.40.5'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     kapt 'com.google.dagger:dagger-compiler:2.40.5'
     kapt 'com.google.dagger:hilt-compiler:2.40.5'
     kapt 'com.google.dagger:hilt-android-compiler:2.40.5'
@@ -88,8 +88,6 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     /** Tests */
-    /** Test */
-
     //Roboelectric
     testImplementation "org.robolectric:robolectric:4.7.3"
 
