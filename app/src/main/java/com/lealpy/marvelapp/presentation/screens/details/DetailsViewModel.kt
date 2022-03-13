@@ -1,7 +1,6 @@
 package com.lealpy.marvelapp.presentation.screens.details
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -31,7 +30,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private fun getCharacterById(characterId: Int) {
-        _progressBarVisibility.value = View.VISIBLE
+        showProgress()
         disposable.add(
             getCharacterByIdUseCase(characterId)
                 .subscribeOn(Schedulers.io())
@@ -39,11 +38,11 @@ class DetailsViewModel @Inject constructor(
                 .subscribe(
                     { character ->
                         _character.value = character
-                        _progressBarVisibility.value = View.GONE
+                        hideProgress()
                     },
                     { error ->
                         Log.e(APP_LOG_TAG, error.message.toString())
-                        _progressBarVisibility.value = View.GONE
+                        hideProgress()
                     }
                 )
         )

@@ -1,7 +1,6 @@
 package com.lealpy.marvelapp.presentation.screens.characters
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lealpy.marvelapp.domain.models.Character
@@ -61,7 +60,7 @@ class CharactersViewModel @Inject constructor(
     }
 
     private fun getCharacters() {
-        _progressBarVisibility.value = View.VISIBLE
+        showProgress()
 
         disposable.add(
             getCharactersUseCase()
@@ -70,11 +69,11 @@ class CharactersViewModel @Inject constructor(
                 .subscribe(
                     { characters ->
                         _characters.value = characters
-                        _progressBarVisibility.value = View.GONE
+                        hideProgress()
                     },
                     { error ->
                         Log.e(APP_LOG_TAG, error.message.toString())
-                        _progressBarVisibility.value = View.GONE
+                        hideProgress()
                     }
                 )
         )

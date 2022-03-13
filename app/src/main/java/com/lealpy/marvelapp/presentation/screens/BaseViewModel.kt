@@ -1,5 +1,6 @@
 package com.lealpy.marvelapp.presentation.screens
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,14 @@ abstract class BaseViewModel : ViewModel() {
     override fun onCleared() {
         disposable.dispose()
         super.onCleared()
+    }
+
+    protected fun showProgress() {
+        _progressBarVisibility.value = View.VISIBLE
+    }
+
+    protected fun hideProgress() {
+        _progressBarVisibility.value = View.GONE
     }
 
 }
