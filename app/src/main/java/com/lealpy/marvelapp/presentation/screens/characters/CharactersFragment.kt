@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.FragmentCharactersBinding
 import com.lealpy.marvelapp.domain.models.SortBy
@@ -46,6 +47,18 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
 
         binding.recyclerView.addItemDecoration(characterDecoration)
 
+        characterAdapter.registerAdapterDataObserver(
+            object : RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                    binding.recyclerView.scrollToPosition(0)
+                }
+
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    binding.recyclerView.scrollToPosition(0)
+                }
+            }
+        )
+
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onSwipedRefresh()
             binding.swipeRefreshLayout.isRefreshing = false
@@ -59,7 +72,6 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
     private fun initObservers() {
         viewModel.characters.observe(viewLifecycleOwner) { characters ->
             characterAdapter.submitList(characters)
-            binding.recyclerView.smoothScrollToPosition(0)
         }
 
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
