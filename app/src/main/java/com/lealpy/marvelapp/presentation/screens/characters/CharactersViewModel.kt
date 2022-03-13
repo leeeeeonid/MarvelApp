@@ -1,17 +1,18 @@
 package com.lealpy.marvelapp.presentation.screens.characters
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lealpy.marvelapp.domain.models.Character
 import com.lealpy.marvelapp.domain.models.SortBy
 import com.lealpy.marvelapp.domain.use_cases.GetCharactersUseCase
 import com.lealpy.marvelapp.presentation.screens.BaseViewModel
 import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -61,23 +62,21 @@ class CharactersViewModel @Inject constructor(
     }
 
     private fun getCharacters() {
-        _progressBarVisibility.value = View.VISIBLE
+        viewModelScope.launch {
+            try {
+                showProgress()
 
-        disposable.add(
-            getCharactersUseCase()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { characters ->
-                        _characters.value = characters
-                        _progressBarVisibility.value = View.GONE
-                    },
-                    { error ->
-                        Log.e(APP_LOG_TAG, error.message.toString())
-                        _progressBarVisibility.value = View.GONE
-                    }
-                )
-        )
+                val characters = withContext(Dispatchers.IO) {
+                    getCharactersUseCase()
+                }
+
+                _characters.value = characters
+                hideProgress()
+            } catch (e: Exception) {
+                Log.e(APP_LOG_TAG, e.message.toString())
+                hideProgress()
+            }
+        }
     }
 
 }

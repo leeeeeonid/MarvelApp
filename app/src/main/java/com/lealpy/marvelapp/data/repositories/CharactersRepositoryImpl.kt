@@ -7,8 +7,6 @@ import com.lealpy.marvelapp.data.utils.toCharacterEntities
 import com.lealpy.marvelapp.data.utils.toCharacters
 import com.lealpy.marvelapp.domain.models.Character
 import com.lealpy.marvelapp.domain.repositories.CharactersRepository
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class CharactersRepositoryImpl @Inject constructor(
@@ -16,23 +14,21 @@ class CharactersRepositoryImpl @Inject constructor(
     private val charactersDao: CharactersDao,
 ) : CharactersRepository {
 
-    override fun getCharacters(): Single<List<Character>> {
-        return charactersApi.getCharacters(limit = LIMIT_ITEMS).map { characterResponse ->
-            characterResponse.data.results.toCharacters()
-        }
-            .doOnSuccess { characters ->
-                insertCharactersToDb(characters).blockingSubscribe()
-            }
+    override suspend fun getCharacters(): List<Character> {
+        val characters = charactersApi.getCharacters(limit = LIMIT_ITEMS)
+            .data
+            .results
+            .toCharacters()
+        insertCharactersToDb(characters)
+        return characters
     }
 
-    override fun getCharacterById(characterId: Int): Single<Character> {
-        return charactersDao.getCharacterEntityById(characterId).map { characterEntity ->
-            characterEntity.toCharacter()
-        }
+    override suspend fun getCharacterById(characterId: Int): Character {
+        return charactersDao.getCharacterEntityById(characterId).toCharacter()
     }
 
-    private fun insertCharactersToDb(characters: List<Character>): Completable {
-        return charactersDao.insertCharacterEntities(characters.toCharacterEntities())
+    private suspend fun insertCharactersToDb(characters: List<Character>) {
+        charactersDao.insertCharacterEntities(characters.toCharacterEntities())
     }
 
     companion object {

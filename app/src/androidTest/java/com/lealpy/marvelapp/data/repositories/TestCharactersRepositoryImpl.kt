@@ -2,15 +2,14 @@ package com.lealpy.marvelapp.data.repositories
 
 import com.lealpy.marvelapp.domain.models.Character
 import com.lealpy.marvelapp.domain.repositories.CharactersRepository
-import io.reactivex.rxjava3.core.Single
 
 class TestCharactersRepositoryImpl : CharactersRepository {
-    override fun getCharacters(): Single<List<Character>> {
-        return Single.just(TEST_CHARACTERS)
+    override suspend fun getCharacters(): List<Character> {
+        return TEST_CHARACTERS
     }
 
-    override fun getCharacterById(characterId: Int): Single<Character> {
-        return Single.just(TEST_CHARACTERS[0])
+    override suspend fun getCharacterById(characterId: Int): Character {
+        return TEST_CHARACTERS[0]
     }
 
     companion object {

@@ -1,18 +1,19 @@
 package com.lealpy.marvelapp.presentation.screens.details
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.lealpy.marvelapp.domain.models.Character
 import com.lealpy.marvelapp.domain.use_cases.GetCharacterByIdUseCase
 import com.lealpy.marvelapp.presentation.screens.BaseViewModel
 import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
 import com.lealpy.marvelapp.presentation.utils.Const.CHARACTER_ID_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,22 +32,21 @@ class DetailsViewModel @Inject constructor(
     }
 
     private fun getCharacterById(characterId: Int) {
-        _progressBarVisibility.value = View.VISIBLE
-        disposable.add(
-            getCharacterByIdUseCase(characterId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { character ->
-                        _character.value = character
-                        _progressBarVisibility.value = View.GONE
-                    },
-                    { error ->
-                        Log.e(APP_LOG_TAG, error.message.toString())
-                        _progressBarVisibility.value = View.GONE
-                    }
-                )
-        )
+        viewModelScope.launch {
+            try {
+                showProgress()
+
+                val character = withContext(Dispatchers.IO) {
+                    getCharacterByIdUseCase(characterId)
+                }
+
+                _character.value = character
+                hideProgress()
+            } catch (e: Exception) {
+                Log.e(APP_LOG_TAG, e.message.toString())
+                hideProgress()
+            }
+        }
     }
 
 }

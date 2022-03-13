@@ -9,11 +9,9 @@ import com.lealpy.marvelapp.data.repositories.TestCharactersRepositoryImpl
 import com.lealpy.marvelapp.di.RepositoriesModule
 import com.lealpy.marvelapp.di.UseCasesModule
 import com.lealpy.marvelapp.di.launchFragmentInHiltContainer
-import com.squareup.rx3.idler.Rx3Idler
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -31,10 +29,6 @@ class CharactersFragmentTest {
     @Before
     fun init() {
         hiltRule.inject()
-
-        RxJavaPlugins.setInitIoSchedulerHandler(
-            Rx3Idler.create("RxJava 3.x IO Scheduler")
-        )
     }
 
     @Test
