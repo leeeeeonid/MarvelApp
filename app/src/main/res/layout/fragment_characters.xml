@@ -10,7 +10,7 @@
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="@dimen/dimen_0_dp"
         android:layout_marginTop="@dimen/dimen_24_dp"
-        android:layout_marginBottom="@dimen/dimen_20_dp"
+        android:layout_marginBottom="@dimen/dimen_9_dp"
         android:paddingStart="@dimen/dimen_12_dp"
         android:paddingEnd="@dimen/dimen_12_dp"
         app:layout_constraintBottom_toTopOf="@+id/filtersBtn"
