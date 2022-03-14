@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/dimen_16_dp">
+        android:paddingBottom="@dimen/padding">
 
         <ImageView
             android:id="@+id/characterImage"
@@ -24,9 +24,9 @@
             android:id="@+id/characterName"
             android:layout_width="@dimen/dimen_0_dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_16_dp"
+            android:layout_marginStart="@dimen/padding"
             android:layout_marginTop="@dimen/dimen_16_dp"
-            android:layout_marginEnd="@dimen/dimen_16_dp"
+            android:layout_marginEnd="@dimen/padding"
             android:fontFamily="@font/roboto_medium"
             android:textAlignment="textStart"
             android:textColor="@color/text_black"

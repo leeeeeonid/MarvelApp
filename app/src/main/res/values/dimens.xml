@@ -13,6 +13,7 @@
     <dimen name="dimen_30_dp">30dp</dimen>
     <dimen name="dimen_36_dp">36dp</dimen>
     <dimen name="dimen_110_dp">110dp</dimen>
+    <dimen name="padding">12dp</dimen>
 
     <!-- Scalable Pixels -->
     <dimen name="dimen_12_sp">12sp</dimen>

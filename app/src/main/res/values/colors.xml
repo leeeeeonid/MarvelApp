@@ -4,6 +4,8 @@
     <color name="white">#FFFFFF</color>
     <color name="gray">#5F5F5F</color>
     <color name="green">#41EB5C</color>
+    <color name="color_primary">#972323</color>
+    <color name="color_primary_variant">#630000</color>
     <color name="text_black">#000000</color>
     <color name="radio_btn_tick_state_checked">#1DDE7D</color>
     <color name="radio_btn_tick_state_unchecked">#C8E4DE</color>

@@ -1,9 +1,14 @@
 package com.lealpy.marvelapp.presentation.screens.details
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.lealpy.marvelapp.R
 import com.lealpy.marvelapp.databinding.FragmentDetailsBinding
@@ -19,6 +24,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailsBinding.bind(view)
         initObservers()
+        initToolbar()
     }
 
     private fun initObservers() {
@@ -36,6 +42,30 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
             binding.progressBar.visibility = progressBarVisibility
         }
+    }
+
+    private fun initToolbar() {
+        setHasOptionsMenu(true)
+        val appCompatActivity = (requireActivity() as? AppCompatActivity)
+        appCompatActivity?.supportActionBar?.title = getString(R.string.details_title)
+        appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.filters_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().popBackStack()
+            }
+            R.id.filtersApplyBtn -> {
+                findNavController().navigate(R.id.action_charactersFragment_to_filtersFragment)
+            }
+        }
+        return true
     }
 
 }

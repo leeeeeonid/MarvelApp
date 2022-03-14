@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">MarvelApp</string>
-    <string name="characters_filter_btn_text">Фильтры</string>
-    <string name="filters_title">Фильтры</string>
-    <string name="filters_sort_by_alphabet">По алфавиту</string>
-    <string name="filters_sort_by_date">По дате изменения</string>
-    <string name="filters_sort_by_alphabet_descending">По алфавиту в обратном порядке</string>
-    <string name="filters_sort_by_date_descending">По дате изменения в обратном порядке</string>
-    <string name="filters_apply">Применить</string>
-    <string name="no_internet">Отсутствует интернет-соединение</string>
+    <string name="filters_title">Filters</string>
+    <string name="filters_sort_by_alphabet">Sort by alphabet</string>
+    <string name="filters_sort_by_date">Sort by change date</string>
+    <string name="filters_sort_by_alphabet_descending">Sort by alphabet descending</string>
+    <string name="filters_sort_by_date_descending">Sort by change date descending</string>
+    <string name="filters_apply">Apply</string>
+    <string name="no_internet">No internet connection</string>
+    <string name="characters_title">Characters</string>
+    <string name="details_title">Details</string>
 </resources>
