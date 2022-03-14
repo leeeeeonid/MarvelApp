@@ -2,7 +2,11 @@ package com.lealpy.marvelapp.presentation.screens.characters
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,13 +40,14 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
         binding = FragmentCharactersBinding.bind(view)
         initViews()
         initObservers()
+        initToolbar()
     }
 
     private fun initViews() {
         binding.recyclerView.adapter = characterAdapter
 
         val characterDecoration = CharacterDecoration(
-            requireContext().resources.getDimension(R.dimen.dimen_36_dp).toInt()
+            requireContext().resources.getDimension(R.dimen.dimen_12_dp).toInt()
         )
 
         binding.recyclerView.addItemDecoration(characterDecoration)
@@ -62,10 +67,6 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onSwipedRefresh()
             binding.swipeRefreshLayout.isRefreshing = false
-        }
-
-        binding.filtersBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_charactersFragment_to_filtersFragment)
         }
     }
 
@@ -90,7 +91,27 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
         } catch (e: Exception) {
             Log.e(APP_LOG_TAG, e.message.toString())
         }
+    }
 
+    private fun initToolbar() {
+        setHasOptionsMenu(true)
+        val appCompatActivity = (requireActivity() as? AppCompatActivity)
+        appCompatActivity?.supportActionBar?.title = getString(R.string.characters_title)
+        appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.characters_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.charactersFilterBtn -> {
+                findNavController().navigate(R.id.action_charactersFragment_to_filtersFragment)
+            }
+        }
+        return true
     }
 
 }

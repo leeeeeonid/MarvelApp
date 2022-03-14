@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 
 abstract class BaseViewModel : ViewModel() {
 
-    protected val _progressBarVisibility = MutableLiveData<Int>()
+    private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
 
     protected fun showProgress() {

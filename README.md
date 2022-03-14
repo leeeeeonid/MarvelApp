@@ -25,3 +25,6 @@ https://user-images.githubusercontent.com/90380451/158034871-49e21ab6-c2d4-4648-
 - Glide
 - Room
 - Espresso, Junit, Mockito
+
+
+### Примечание: в ветке feature_coroutines библиотека RXJava заменена на корутины.
