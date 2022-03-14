@@ -47,7 +47,7 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
         binding.recyclerView.adapter = characterAdapter
 
         val characterDecoration = CharacterDecoration(
-            requireContext().resources.getDimension(R.dimen.dimen_36_dp).toInt()
+            requireContext().resources.getDimension(R.dimen.dimen_12_dp).toInt()
         )
 
         binding.recyclerView.addItemDecoration(characterDecoration)

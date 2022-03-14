@@ -1,8 +1,6 @@
 package com.lealpy.marvelapp.presentation.screens.details
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -51,18 +49,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.filters_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 findNavController().popBackStack()
-            }
-            R.id.filtersApplyBtn -> {
-                findNavController().navigate(R.id.action_charactersFragment_to_filtersFragment)
             }
         }
         return true
