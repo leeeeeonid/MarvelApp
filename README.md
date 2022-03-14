@@ -13,7 +13,7 @@
 Приложение покрыто unit и ui тестами.
 
 ## Видео работы приложения
-https://user-images.githubusercontent.com/90380451/158034871-49e21ab6-c2d4-4648-bbdf-038c6fca700f.mp4
+https://user-images.githubusercontent.com/90380451/158236693-8a92398f-7485-4415-9d7b-7d9046942d5d.mp4
 
 ## Стек технологий:
 - Clean architecture, MVVM
