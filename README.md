@@ -13,7 +13,7 @@
 Приложение покрыто unit и ui тестами.
 
 ## Видео работы приложения
-https://user-images.githubusercontent.com/90380451/158236365-4e7e5633-e235-4039-aa87-2beece80ef22.mp4
+https://user-images.githubusercontent.com/90380451/158475629-fedb7113-e87a-4365-9553-26e14e5d120f.mp4
 
 ## Стек технологий:
 - Clean architecture, MVVM
@@ -27,4 +27,4 @@ https://user-images.githubusercontent.com/90380451/158236365-4e7e5633-e235-4039-
 - Espresso, Junit, Mockito
 
 
-### Примечание: в ветке feature_coroutines библиотека RXJava заменена на корутины.
+### Примечание: в ветке develop_coroutines многопоточность реализована с помощью Kotlin Coroutines.
