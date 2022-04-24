@@ -13,6 +13,7 @@ import com.lealpy.marvelapp.databinding.FragmentFiltersBinding
 import com.lealpy.marvelapp.domain.models.SortBy
 import com.lealpy.marvelapp.domain.models.SortBy.*
 import com.lealpy.marvelapp.presentation.utils.Const.FILTERS_RESULT_KEY
+import com.lealpy.marvelapp.presentation.utils.Const.SORT_BY_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,13 +25,7 @@ class FiltersFragment : Fragment(R.layout.fragment_filters) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFiltersBinding.bind(view)
         initToolbar()
-    }
-
-    private fun initToolbar() {
-        setHasOptionsMenu(true)
-        val appCompatActivity = (requireActivity() as? AppCompatActivity)
-        appCompatActivity?.supportActionBar?.title = getString(R.string.filters_title)
-        appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        initViews()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,6 +50,25 @@ class FiltersFragment : Fragment(R.layout.fragment_filters) {
             }
         }
         return true
+    }
+
+    private fun initToolbar() {
+        setHasOptionsMenu(true)
+        val appCompatActivity = (requireActivity() as? AppCompatActivity)
+        appCompatActivity?.supportActionBar?.title = getString(R.string.filters_title)
+        appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun initViews() {
+        val sortBy = arguments?.get(SORT_BY_KEY) as? SortBy
+        val radioBtnId = when (sortBy) {
+            BY_ALPHABET -> R.id.sortByAlphabetBtn
+            BY_DATE -> R.id.sortByDateBtn
+            BY_ALPHABET_DESCENDING -> R.id.sortByAlphabetDescendingBtn
+            BY_DATE_DESCENDING -> R.id.sortByDateDescendingBtn
+            else -> R.id.sortByAlphabetBtn
+        }
+        binding.sortByRadioGroup.check(radioBtnId)
     }
 
     private fun setFragmentResult(sortBy: SortBy) {

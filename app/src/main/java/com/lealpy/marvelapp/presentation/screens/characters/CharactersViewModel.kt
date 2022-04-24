@@ -8,6 +8,7 @@ import com.lealpy.marvelapp.domain.models.SortBy
 import com.lealpy.marvelapp.domain.use_cases.GetCharactersUseCase
 import com.lealpy.marvelapp.presentation.screens.BaseViewModel
 import com.lealpy.marvelapp.presentation.utils.Const.APP_LOG_TAG
+import com.lealpy.marvelapp.presentation.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -21,6 +22,11 @@ class CharactersViewModel @Inject constructor(
     private val _characters = MutableLiveData<List<Character>>()
     val characters: LiveData<List<Character>> = _characters
 
+    private val navigateToFilterEvent = SingleLiveEvent<SortBy>()
+    fun navigateToFilter() = navigateToFilterEvent
+
+    private var sortBy = SortBy.BY_ALPHABET
+
     init {
         getCharacters()
     }
@@ -30,33 +36,18 @@ class CharactersViewModel @Inject constructor(
     }
 
     fun onSortByClicked(sortBy: SortBy) {
+        this.sortBy = sortBy
         val characters = _characters.value
+
         if (characters != null) {
-            when (sortBy) {
-                SortBy.BY_ALPHABET -> {
-                    _characters.value = characters.sortedBy { character ->
-                        character.name
-                    }
-                }
-                SortBy.BY_DATE -> {
-                    _characters.value = characters.sortedBy { character ->
-                        character.modified
-                    }
-                }
-                SortBy.BY_ALPHABET_DESCENDING -> {
-                    _characters.value = characters.sortedByDescending { character ->
-                        character.name
-                    }
-                }
-                SortBy.BY_DATE_DESCENDING -> {
-                    _characters.value = characters.sortedByDescending { character ->
-                        character.modified
-                    }
-                }
-            }
+            _characters.value = getSortedCharacters(characters, sortBy)
         } else {
             getCharacters()
         }
+    }
+
+    fun onCharactersFilterBtnClicked() {
+        navigateToFilterEvent.value = sortBy
     }
 
     private fun getCharacters() {
@@ -68,7 +59,7 @@ class CharactersViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { characters ->
-                        _characters.value = characters
+                        _characters.value = getSortedCharacters(characters, sortBy)
                         hideProgress()
                     },
                     { error ->
@@ -77,6 +68,31 @@ class CharactersViewModel @Inject constructor(
                     }
                 )
         )
+    }
+
+    private fun getSortedCharacters(characters: List<Character>, sortBy: SortBy): List<Character> {
+        return when (sortBy) {
+            SortBy.BY_ALPHABET -> {
+                characters.sortedBy { character ->
+                    character.name
+                }
+            }
+            SortBy.BY_DATE -> {
+                characters.sortedBy { character ->
+                    character.modified
+                }
+            }
+            SortBy.BY_ALPHABET_DESCENDING -> {
+                characters.sortedByDescending { character ->
+                    character.name
+                }
+            }
+            SortBy.BY_DATE_DESCENDING -> {
+                characters.sortedByDescending { character ->
+                    character.modified
+                }
+            }
+        }
     }
 
 }

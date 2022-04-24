@@ -37,3 +37,15 @@ fun CharacterEntity.toCharacter(): Character {
         modified = this.modified
     )
 }
+
+fun List<CharacterEntity>.entityToCharacters(): List<Character> {
+    return this.map { characterEntity ->
+        Character(
+            id = characterEntity.id,
+            name = characterEntity.name,
+            description = characterEntity.description,
+            imageURL = characterEntity.imageURL,
+            modified = characterEntity.modified
+        )
+    }
+}

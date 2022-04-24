@@ -13,6 +13,9 @@ interface CharactersDao {
     @Query("SELECT * FROM character_entities WHERE id = :characterId")
     fun getCharacterEntityById(characterId: Int): Single<CharacterEntity>
 
+    @Query("SELECT * FROM character_entities")
+    fun getCharacterEntities(): Single<List<CharacterEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCharacterEntities(toCharacterEntities: List<CharacterEntity>): Completable
 

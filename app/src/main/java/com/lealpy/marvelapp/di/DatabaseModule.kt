@@ -26,7 +26,6 @@ class DatabaseModule {
     }
 
     @Provides
-    @Singleton
     fun provideCharactersDao(appDatabase: AppDatabase): CharactersDao {
         return appDatabase.charactersDao()
     }
