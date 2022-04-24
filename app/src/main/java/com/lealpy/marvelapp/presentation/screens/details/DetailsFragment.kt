@@ -25,6 +25,15 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         initToolbar()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().popBackStack()
+            }
+        }
+        return true
+    }
+
     private fun initObservers() {
         viewModel.character.observe(viewLifecycleOwner) { characterUi ->
             binding.characterName.text = characterUi.name
@@ -47,15 +56,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         val appCompatActivity = (requireActivity() as? AppCompatActivity)
         appCompatActivity?.supportActionBar?.title = getString(R.string.details_title)
         appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                findNavController().popBackStack()
-            }
-        }
-        return true
     }
 
 }

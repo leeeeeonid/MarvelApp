@@ -9,7 +9,7 @@
         android:id="@+id/sort_by_radio_group"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
-        android:checkedButton="@+id/sortByAlphabetBtn"
+        android:checked="false"
         android:dividerPadding="@dimen/dimen_16_dp"
         android:showDividers="middle"
         app:layout_constraintEnd_toEndOf="parent"

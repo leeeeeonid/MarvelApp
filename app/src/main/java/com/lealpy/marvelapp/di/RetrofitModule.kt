@@ -35,7 +35,6 @@ class RetrofitModule {
     }
 
     @Provides
-    @Singleton
     fun provideCharactersApi(retrofit: Retrofit): CharactersApi {
         return retrofit.create(CharactersApi::class.java)
     }
